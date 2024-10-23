@@ -15,11 +15,9 @@ import {
   Box,
   Menu,
   MenuItem,
-  Button,
-  Grid,
-  Paper,
 } from '@mui/material';
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
+import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import DashboardIcon from '@mui/icons-material/Dashboard';
@@ -36,6 +34,7 @@ import Brightness7Icon from '@mui/icons-material/Brightness7';
 import avatarPhoto from '../../img/avatarPhoto.png';
 import NataliaLogo from '../../img/JoseLogo.png';
 import DashboardContent from './Dashboard';
+import Notepad from '../components/Notepad';
 
 const drawerWidth = 320;
 
@@ -69,17 +68,11 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   ...theme.mixins.toolbar,
 }));
 
-const Widget = ({ title, children }) => (
-  <Paper elevation={3} sx={{ padding: 2, marginBottom: 2 }}>
-    <Typography variant="h6" gutterBottom>{title}</Typography>
-    {children}
-  </Paper>
-);
-
 const SideNav = () => {
   const [open, setOpen] = useState(true);
   const [mode, setMode] = useState('light');
   const [anchorEl, setAnchorEl] = useState(null);
+  const navigate = useNavigate(); // For handling navigation
 
   const handleDrawerToggle = () => {
     setOpen(!open);
@@ -97,14 +90,18 @@ const SideNav = () => {
     setAnchorEl(null);
   };
 
+  const handleNavClick = (path) => {
+    navigate(path);
+  };
+
   const navItems = [
-    { text: 'Dashboard', icon: <DashboardIcon /> },
-    { text: 'Weather', icon: <CloudIcon /> },
-    { text: 'Calendar', icon: <CalendarTodayIcon /> },
-    { text: 'Stocks', icon: <ShowChartIcon /> },
-    { text: 'Notepad', icon: <NoteIcon /> },
-    { text: 'Todo', icon: <TaskIcon /> },
-    { text: 'Email', icon: <MailIcon /> },
+    { text: 'Dashboard', icon: <DashboardIcon />, path: '/' },
+    { text: 'Weather', icon: <CloudIcon />, path: '/weather' },
+    { text: 'Calendar', icon: <CalendarTodayIcon />, path: '/calendar' },
+    { text: 'Stocks', icon: <ShowChartIcon />, path: '/stocks' },
+    { text: 'Notepad', icon: <NoteIcon />, path: '/notepad' },
+    { text: 'Todo', icon: <TaskIcon />, path: '/todo' },
+    { text: 'Email', icon: <MailIcon />, path: '/email' },
   ];
 
   const theme = createTheme({
@@ -192,7 +189,7 @@ const SideNav = () => {
           <Divider />
           <List>
             {navItems.map((item) => (
-              <ListItem button key={item.text} sx={{ marginLeft: 2 }}>
+              <ListItem button key={item.text} sx={{ marginLeft: 2 }} onClick={() => handleNavClick(item.path)}>
                 <ListItemIcon>{item.icon}</ListItemIcon>
                 <ListItemText primary={item.text} />
               </ListItem>
@@ -201,10 +198,13 @@ const SideNav = () => {
         </Drawer>
 
         <Main open={open}>
-  <DrawerHeader />
-  <DashboardContent />
-</Main>
-
+          <DrawerHeader />
+          <Routes>
+            <Route path="/" element={<DashboardContent />} />
+            <Route path="/notepad" element={<Notepad />} />
+            {/* Add other routes as needed */}
+          </Routes>
+        </Main>
       </Box>
     </ThemeProvider>
   );

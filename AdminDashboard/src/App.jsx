@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
 import SideNav from './assets/components/Sidenav';
 import { ThemeProvider, createTheme, CssBaseline } from '@mui/material';
 
@@ -20,13 +21,14 @@ function App() {
       primary: '#333',
       secondary: '#555',
     },
-    
   });
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <SideNav darkMode={darkMode} setDarkMode={setDarkMode} />
+      <Router>
+        <SideNav darkMode={darkMode} setDarkMode={setDarkMode} />
+      </Router>
     </ThemeProvider>
   );
 }
