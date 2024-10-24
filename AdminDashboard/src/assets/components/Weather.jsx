@@ -44,17 +44,18 @@ const WeatherApp = () => {
     const icon = weather[0].main.toLowerCase();
     switch (icon) {
       case 'clear':
-        return <WbSunnyIcon sx={{ color: theme.palette.yellow.main }} />;
+        return <WbSunnyIcon sx={{ color: '#FFEB3B' }} />; // Yellow color
       case 'clouds':
         return <CloudIcon sx={{ color: theme.palette.grey[500] }} />;
       case 'snow':
-        return <AcUnitIcon sx={{ color: theme.palette.blue.main }} />;
+        return <AcUnitIcon sx={{ color: theme.palette.primary.main }} />;
       case 'rain':
-        return <CloudIcon sx={{ color: theme.palette.blue.main }} />;
+        return <CloudIcon sx={{ color: theme.palette.primary.main }} />;
       default:
         return <CloudIcon sx={{ color: theme.palette.grey[500] }} />;
     }
   };
+  
 
   return (
     <Box 
