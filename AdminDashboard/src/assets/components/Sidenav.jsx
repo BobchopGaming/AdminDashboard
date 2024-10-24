@@ -35,6 +35,9 @@ import avatarPhoto from '../../img/avatarPhoto.png';
 import NataliaLogo from '../../img/JoseLogo.png';
 import DashboardContent from './Dashboard';
 import Notepad from '../components/Notepad';
+import Calendar from '../components/Calendar';
+import Weather from '../components/Weather'
+import Email from '../components/Email'
 
 const drawerWidth = 320;
 
@@ -202,6 +205,9 @@ const SideNav = () => {
           <Routes>
             <Route path="/" element={<DashboardContent />} />
             <Route path="/notepad" element={<Notepad />} />
+            <Route path="/calendar" element={<Calendar />} />
+            <Route path="/weather" element={<Weather />} />
+            <Route path="/email" element={<Email />} />
             {/* Add other routes as needed */}
           </Routes>
         </Main>
