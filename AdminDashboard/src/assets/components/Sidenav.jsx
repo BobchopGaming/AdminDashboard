@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   AppBar,
   Toolbar,
@@ -36,15 +36,26 @@ import NataliaLogo from '../../img/JoseLogo.png';
 import DashboardContent from './Dashboard';
 import Notepad from '../components/Notepad';
 import Calendar from '../components/Calendar';
-import Weather from '../components/Weather'
-import Email from '../components/Email'
+import Weather from '../components/Weather';
+import Email from '../components/Email';
+import Stocks from '../components/Stocks';
+import TodoList from '../components/TodoList';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 const drawerWidth = 320;
+
+// Define the DrawerHeader component
+const DrawerHeader = styled('div')(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  padding: theme.spacing(0, 1),
+  ...theme.mixins.toolbar,
+  justifyContent: 'space-between',
+}));
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
     flexGrow: 1,
-    padding: theme.spacing(3),
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
@@ -57,25 +68,17 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
       }),
       marginLeft: 0,
     }),
-    backgroundColor: theme.palette.background.default,
-    color: theme.palette.text.primary,
-    minHeight: '100vh',
-  })
+  }),
 );
-
-const DrawerHeader = styled('div')(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  padding: theme.spacing(0, 1),
-  justifyContent: 'flex-end',
-  ...theme.mixins.toolbar,
-}));
 
 const SideNav = () => {
   const [open, setOpen] = useState(true);
   const [mode, setMode] = useState('light');
   const [anchorEl, setAnchorEl] = useState(null);
   const navigate = useNavigate(); // For handling navigation
+
+  // New media query for screen width
+  const isSmallScreen = useMediaQuery('(max-width:800px)');
 
   const handleDrawerToggle = () => {
     setOpen(!open);
@@ -120,6 +123,15 @@ const SideNav = () => {
     },
   });
 
+  // Effect to collapse drawer on small screens
+  useEffect(() => {
+    if (isSmallScreen) {
+      setOpen(false);
+    } else {
+      setOpen(true);
+    }
+  }, [isSmallScreen]);
+
   return (
     <ThemeProvider theme={theme}>
       <Box sx={{ display: 'flex' }}>
@@ -136,7 +148,7 @@ const SideNav = () => {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
-              App Title
+            TaskNest DashApp
             </Typography>
 
             <IconButton color="inherit">
@@ -175,16 +187,22 @@ const SideNav = () => {
           open={open}
         >
           <DrawerHeader>
+            <img
+              src={NataliaLogo}
+              alt="Logo"
+              style={{
+                maxHeight: '50px',
+                marginRight: 'auto',
+              }}
+            />
             <IconButton onClick={handleDrawerToggle}>
               {open ? <ChevronLeftIcon /> : <MenuIcon />}
             </IconButton>
           </DrawerHeader>
           <Divider />
-          <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 2 }}>
-            <img src={NataliaLogo} alt="Logo" style={{ maxHeight: '50px' }} />
-          </Box>
+          <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 2 }} />
           <Box sx={{ textAlign: 'center', padding: 2 }}>
-            <Avatar sx={{ width: 100, height: 100, margin: 'auto' }} src={avatarPhoto} />
+            <Avatar sx={{ width: 150, height: 150, margin: 'auto' }} src={avatarPhoto} />
             <Typography variant="h6" sx={{ marginTop: 1 }}>
               John Doe
             </Typography>
@@ -208,6 +226,8 @@ const SideNav = () => {
             <Route path="/calendar" element={<Calendar />} />
             <Route path="/weather" element={<Weather />} />
             <Route path="/email" element={<Email />} />
+            <Route path="/stocks" element={<Stocks />} />
+            <Route path="/todo" element={<TodoList />} />
             {/* Add other routes as needed */}
           </Routes>
         </Main>

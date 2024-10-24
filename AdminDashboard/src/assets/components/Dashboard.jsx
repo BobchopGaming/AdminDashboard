@@ -10,7 +10,17 @@ import {
   useTheme,
   useMediaQuery,
 } from '@mui/material';
-import { MoreVert, WbSunny, TrendingUp, CalendarToday, CheckCircle, EventAvailable } from '@mui/icons-material';
+import {
+  MoreVert,
+  WbSunny,
+  TrendingUp,
+  CalendarToday,
+  CheckCircle,
+  EventAvailable,
+  Facebook,
+  GitHub,
+  LinkedIn,
+} from '@mui/icons-material';
 import { motion } from 'framer-motion';
 
 // Sample pseudo data
@@ -45,7 +55,7 @@ const DashboardContent = () => {
       sx={{
         padding: 3,
         backgroundColor: theme.palette.background.default,
-        minHeight: '100vh',
+        minHeight: '100%',
       }}
     >
       <Typography variant="h4" sx={{ marginBottom: 3, fontWeight: 'bold', color: '#1877F2' }}>
@@ -55,7 +65,7 @@ const DashboardContent = () => {
         {/* Welcome Tile */}
         <Grid item xs={12} sm={6} md={4}>
           <motion.div whileHover={{ scale: 1.05 }}>
-            <Card variant="outlined" sx={{ borderRadius: 2, boxShadow: 3, height: '100%', marginTop: '10px' }}>
+            <Card variant="outlined" sx={{ borderRadius: 2, boxShadow: 3, height: '20rem', marginTop: '10px' }}>
               <CardContent sx={{ position: 'relative', height: '100%' }}>
                 <Typography variant="h5" sx={{ fontWeight: 'bold', color: '#1877F2' }}>
                   Welcome User
@@ -81,7 +91,7 @@ const DashboardContent = () => {
         {/* Weather Tile */}
         <Grid item xs={12} sm={6} md={4}>
           <motion.div whileHover={{ scale: 1.05 }}>
-            <Card variant="outlined" sx={{ borderRadius: 2, boxShadow: 3, height: '100%', marginTop: '10px' }}>
+            <Card variant="outlined" sx={{ borderRadius: 2, boxShadow: 3, height: '20rem', marginTop: '10px' }}>
               <CardContent sx={{ height: '100%' }}>
                 <Typography variant="h5" sx={{ marginBottom: 2, fontWeight: 'bold', color: '#1877F2' }}>
                   <WbSunny sx={{ verticalAlign: 'middle', marginRight: 1 }} />
@@ -103,7 +113,7 @@ const DashboardContent = () => {
         {/* Stocks Tile */}
         <Grid item xs={12} sm={6} md={4}>
           <motion.div whileHover={{ scale: 1.05 }}>
-            <Card variant="outlined" sx={{ borderRadius: 2, boxShadow: 3, height: '100%', marginTop: '10px' }}>
+            <Card variant="outlined" sx={{ borderRadius: 2, boxShadow: 3, height: '20rem', marginTop: '10px' }}>
               <CardContent sx={{ height: '100%' }}>
                 <Typography variant="h5" sx={{ marginBottom: 2, fontWeight: 'bold', color: '#1877F2' }}>
                   <TrendingUp sx={{ verticalAlign: 'middle', marginRight: 1 }} />
@@ -125,7 +135,7 @@ const DashboardContent = () => {
         {/* Todo List Tile */}
         <Grid item xs={12} sm={6} md={4}>
           <motion.div whileHover={{ scale: 1.05 }}>
-            <Card variant="outlined" sx={{ borderRadius: 2, boxShadow: 3, height: '100%', marginTop: '10px' }}>
+            <Card variant="outlined" sx={{ borderRadius: 2, boxShadow: 3, height: '20rem', marginTop: '10px' }}>
               <CardContent sx={{ height: '100%' }}>
                 <Typography variant="h5" sx={{ marginBottom: 2, fontWeight: 'bold', color: '#1877F2' }}>
                   <CheckCircle sx={{ verticalAlign: 'middle', marginRight: 1 }} />
@@ -136,6 +146,8 @@ const DashboardContent = () => {
                   <li>Finish project report</li>
                   <li>Meeting with team</li>
                   <li>Call client for feedback</li>
+                  <li>Prepare presentation for next week</li> {/* New Task */}
+                  <li>Review project specifications</li> {/* New Task */}
                 </ul>
               </CardContent>
             </Card>
@@ -145,7 +157,7 @@ const DashboardContent = () => {
         {/* Calendar Tile */}
         <Grid item xs={12} sm={6} md={4}>
           <motion.div whileHover={{ scale: 1.05 }}>
-            <Card variant="outlined" sx={{ borderRadius: 2, boxShadow: 3, height: '100%', marginTop: '10px' }}>
+            <Card variant="outlined" sx={{ borderRadius: 2, boxShadow: 3, height: '20rem', marginTop: '10px' }}>
               <CardContent sx={{ height: '100%' }}>
                 <Typography variant="h5" sx={{ marginBottom: 2, fontWeight: 'bold', color: '#1877F2' }}>
                   <CalendarToday sx={{ verticalAlign: 'middle', marginRight: 1 }} />
@@ -172,7 +184,7 @@ const DashboardContent = () => {
         {/* Upcoming Events Tile */}
         <Grid item xs={12} sm={6} md={4}>
           <motion.div whileHover={{ scale: 1.05 }}>
-            <Card variant="outlined" sx={{ borderRadius: 2, boxShadow: 3, height: '100%', marginTop: '10px' }}>
+            <Card variant="outlined" sx={{ borderRadius: 2, boxShadow: 3, height: '20rem', marginTop: '10px' }}>
               <CardContent sx={{ height: '100%' }}>
                 <Typography variant="h5" sx={{ marginBottom: 2, fontWeight: 'bold', color: '#1877F2' }}>
                   <EventAvailable sx={{ verticalAlign: 'middle', marginRight: 1 }} />
@@ -180,16 +192,45 @@ const DashboardContent = () => {
                 </Typography>
                 <Typography variant="body1" sx={{ marginBottom: 1 }}>Next event on your calendar:</Typography>
                 <ul style={{ paddingLeft: '1.5rem', color: theme.palette.text.primary }}>
-                  <li>Project Deadline - Oct 30</li>
-                  <li>Team Meeting - Nov 1</li>
+                  <li>Project deadline: Oct 30</li>
+                  <li>Team meeting: Nov 2</li>
                 </ul>
               </CardContent>
             </Card>
           </motion.div>
         </Grid>
       </Grid>
+      {/* Footer */}
+      <Box
+        sx={{
+          position: 'absolute',
+          bottom: 0,
+          right: 0,
+          display: 'flex',
+          alignItems: 'center',
+          padding: 2,
+          gap: 1,
+          backgroundColor: 'transparent',
+          color: theme.palette.text.secondary,
+        }}
+      >
+        <Typography variant="body2" sx={{ marginRight: 1 }} fontSize="medium">
+          2024 © <a href="https://bobchopgaming.github.io/myprofile.io/" target="_blank">Jose.O Web Solutions</a> |
+        </Typography>
+        <IconButton href="https://github.com/BobchopGaming" target="_blank" aria-label="GitHub">
+          <GitHub fontSize="medium" />
+        </IconButton>
+        <IconButton href="https://www.linkedin.com/feed/" target="_blank" aria-label="LinkedIn">
+          <LinkedIn fontSize="medium" />
+        </IconButton>
+        <IconButton href="https://www.facebook.com/bobchopgaming565" target="_blank" aria-label="Facebook">
+          <Facebook fontSize="medium" />
+        </IconButton>
+      </Box>
     </Box>
+    
   );
 };
+
 
 export default DashboardContent;

@@ -14,6 +14,9 @@ function App() {
         main: '#3b5998', // Facebook blue
       },
     },
+    typography: {
+      fontFamily: 'Inter, ui-sans-serif, system-ui, sans-serif',
+    },
     background: {
       default: '#f4f6f8',
     },
